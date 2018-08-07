@@ -12,15 +12,15 @@ import axios from 'axios'
 
 @Component
 export default class HelloWorld extends Vue {
-  private msg: string = 'Welcome to Your Vue.js App'
-  private readonly URL: string = 'http://localhost:8080/'
+  private msg: unknown = 'Welcome to Your Vue.js App'
+  // private readonly URL: string = 'http://localhost:8888/'
 
   public async apiPublic(): Promise<unknown> {
-    const res = await axios.get(`${URL}/public`)
+    const res = await axios.get('http://localhost:8888/public')
     this.msg = res.data
   }
   public async apiPrivate(): Promise<unknown> {
-    const res = await axios.get(`${URL}/private`)
+    const res = await axios.get('http://localhost:8888/private')
     this.msg = res.data
   }
 }

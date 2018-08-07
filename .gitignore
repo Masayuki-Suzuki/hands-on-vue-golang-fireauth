@@ -1,3 +1,4 @@
 bin
 pkg
+src/server/vendor
 client/node_modules/
