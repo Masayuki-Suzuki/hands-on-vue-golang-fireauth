@@ -1,7 +1,8 @@
 {
   "defaultSeverity": "warning",
   "extends": [
-    "tslint:recommended"
+    "tslint:recommended",
+    "tslint-config-prettier"
   ],
   "linterOptions": {
     "exclude": [
@@ -9,12 +10,17 @@
     ]
   },
   "rules": {
+    "prettier": true,
     "quotemark": [true, "single"],
     "indent": [true, "spaces", 2],
     "interface-name": false,
     "ordered-imports": false,
     "object-literal-sort-keys": false,
     "no-consecutive-blank-lines": false,
-    "semicolon": false
+    "semicolon": [true, "never"],
+    "no-console": false,
+    "member-access": false,
+    "no-default-export": false,
+    "array-type": [true, "array"]
   }
 }

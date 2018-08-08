@@ -5,7 +5,7 @@
     .inputGrp
       input(type="text" placeholder="Username" v-model="email")
       input(type="password" placeholder="Password" v-model="password")
-      button register
+      button(@click="signIn") register
     p
       | You don't have an account?&nbsp;
       router-link(to="/signup") create account now!!
@@ -13,11 +13,23 @@
 
 <script lang="ts">
   import {Component, Vue} from 'vue-property-decorator'
+  import firebase from 'firebase'
 
   @Component
   export default class SignIn extends Vue {
-    private email: string = '';
-    private password: string = '';
+    private email: string = ''
+    private password: string = ''
+
+    async signIn() {
+      const res: any = await firebase.auth().signInWithEmailAndPassword(this.email, this.password).catch(err => {
+        alert(err.message)
+        console.error(err)
+        throw new Error(err)
+      })
+      console.log(res.user)
+      sessionStorage.setItem('jwt', res.user.qa)
+      this.$router.push('/')
+    }
   }
 </script>
 
