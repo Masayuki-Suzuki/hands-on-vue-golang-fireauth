@@ -5,9 +5,20 @@ import (
 
 	"log"
 
+	"server/middleware"
+
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
+
+	"githu.com/joho/godotenv"
 )
+
+func loadEnv() {
+	err := godotenv.Load()
+	if err != nil {
+		panic("Error loading .env file")
+	}
+}
 
 func public(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("hello public\n"))
@@ -24,7 +35,7 @@ func main() {
 
 	r := mux.NewRouter()
 	r.HandleFunc("/public", public)
-	r.HandleFunc("/private", private)
+	r.HandleFunc("/private", middleware.AuthMiddleware(private))
 
 	log.Fatal(http.ListenAndServe(":8888", handlers.CORS(allowedOrigins, allowedMethods, allowedHandlars)(r)))
 }
