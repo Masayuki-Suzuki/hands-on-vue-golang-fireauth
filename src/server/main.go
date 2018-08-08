@@ -10,7 +10,7 @@ import (
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 
-	"githu.com/joho/godotenv"
+	"github.com/joho/godotenv"
 )
 
 func loadEnv() {
@@ -29,6 +29,7 @@ func private(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	loadEnv()
 	allowedOrigins := handlers.AllowedOrigins([]string{"http://localhost:8080"})
 	allowedMethods := handlers.AllowedMethods([]string{"GET", "POST", "DELETE", "PUT"})
 	allowedHandlars := handlers.AllowedHeaders([]string{"Authorization"})

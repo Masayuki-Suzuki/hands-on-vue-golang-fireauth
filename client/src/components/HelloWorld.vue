@@ -22,7 +22,10 @@ export default class HelloWorld extends Vue {
     this.msg = res.data
   }
   async apiPrivate(): Promise<unknown> {
-    const res = await axios.get('http://localhost:8888/private')
+    const res = await axios.get('http://localhost:8888/private', {
+      headers: { Authorization: `Bearer ${sessionStorage.getItem('jwt')}` }
+    })
+    console.log(res.data)
     this.msg = res.data
   }
   async signOut() {
